@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails { //UserDetails representa um usuário para o Spring Security
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

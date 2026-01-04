@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.NoSuchElementException;
 
-@RestControllerAdvice
+@RestControllerAdvice //Sempre que uma excessão ocorrer, vai olhar para cá
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)

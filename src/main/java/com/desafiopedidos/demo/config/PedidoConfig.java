@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Configuration
+@Configuration //Mostrar pro Spring que é uma Configuration
 public class PedidoConfig {
 
     @Autowired //Serve para injetar o repositório na classe

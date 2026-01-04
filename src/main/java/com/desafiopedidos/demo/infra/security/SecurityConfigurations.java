@@ -15,8 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-@Configuration
-@EnableWebSecurity
+@Configuration //Define as configurações
+@EnableWebSecurity //Ativa o Spring Security
 public class SecurityConfigurations {
 
     @Autowired
@@ -25,14 +25,14 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return
-                http.csrf(csrf -> csrf.disable())
-                        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                http.csrf(csrf -> csrf.disable()) //CSRF é proteção para sessão/cookies, como não usa sessão, foi desativado
+                        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // STATELESS não guarda login, é preciso do token
                         .authorizeHttpRequests(req -> {
-                            req.requestMatchers("/login").permitAll();
-                            req.anyRequest().authenticated();
+                            req.requestMatchers("/login").permitAll(); // Endpoint de login pode acessar sem autenticação
+                            req.anyRequest().authenticated(); // Todas as outras requisições precisam ser autenticadas
                         })
-                        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                        .build();
+                        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) //Primeiro tem que ser lido o token
+                        .build(); //Constrói o SecurityFIlterChain
 
 
     }

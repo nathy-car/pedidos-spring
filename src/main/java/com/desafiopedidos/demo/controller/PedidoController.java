@@ -22,26 +22,26 @@ public class PedidoController {
     private PedidoService pedido;
 
     @GetMapping
-    public ResponseEntity<List<PedidoDTO>> retornarPedidos(){
+    public ResponseEntity retornarPedidos(){
             List<PedidoDTO> mostrar = pedido.listarTudo();
             return ResponseEntity.ok().body(mostrar);
     }
 
     @PostMapping(value = "/nova_criacao")
-       public ResponseEntity<Pedido> criarPedido(@RequestBody @Valid Pedido pedidoCriar){
+       public ResponseEntity criarPedido(@RequestBody @Valid Pedido pedidoCriar){
                 Pedido pedidoNovo = pedido.criarPedido(pedidoCriar);
                 return ResponseEntity.ok(pedidoNovo);
         }
 
     @PutMapping(value = "/atualizar/{id}")
-    public ResponseEntity<Pedido> atualizarPedido(@RequestBody Pedido pedidoAtualizar,
+    public ResponseEntity atualizarPedido(@RequestBody Pedido pedidoAtualizar,
                                                   @PathVariable Long id){
             Pedido pedidoAtualizado = pedido.atualizarPedido(pedidoAtualizar, id);
             return ResponseEntity.status(HttpStatus.CREATED).body(pedidoAtualizado);
     }
 
     @GetMapping(value = "/mostrar-por-id/{id}")
-    public ResponseEntity<Pedido> mostrarPorId(@PathVariable Long id){
+    public ResponseEntity mostrarPorId(@PathVariable Long id){
             Pedido pedido1 = pedido.retornaPeloId(id);
             return ResponseEntity.ok(pedido1);
     }

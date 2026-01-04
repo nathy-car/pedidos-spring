@@ -43,11 +43,11 @@ public class SecurityFilter extends OncePerRequestFilter { //Roda uma vez por re
             var usuario = repository.findByLogin(subject);
 
             var authentication = new UsernamePasswordAuthenticationToken(usuario,
-                    null, usuario.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                    null, usuario.getAuthorities()); //Está dizendo que o usuário já está autenticado
+            SecurityContextHolder.getContext().setAuthentication(authentication); //Spring trata a requisição como autenticada
       }
 
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response); //Passa para o próximo filtro agora com o usuário autenticado
 
     }
 
